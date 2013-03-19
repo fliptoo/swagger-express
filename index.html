@@ -1,0 +1,226 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>{swagger-express} by fliptoo</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>{swagger-express}</h1>
+        <p>Swagger + Express = {swagger-express}</p>
+        <p class="view"><a href="https://github.com/fliptoo/swagger-express">View the Project on GitHub <small>fliptoo/swagger-express</small></a></p>
+        <ul>
+          <li><a href="https://github.com/fliptoo/swagger-express/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/fliptoo/swagger-express/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/fliptoo/swagger-express">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <p>Just another swagger + express integration, but this is much simple and clean.</p>
+
+<h2>Installation</h2>
+
+<pre><code>$ npm install -g swagger-express
+</code></pre>
+
+<h2>Quick Start</h2>
+
+<p>Configure {swagger-express} as express middleware.</p>
+
+<p><code>apiVersion</code>      -&gt; Your api version.</p>
+
+<p><code>swaggerVersion</code>  -&gt; Swagger version.</p>
+
+<p><code>basePath</code>        -&gt; This is the base path of the server declaring the apis.</p>
+
+<p><code>swaggerUI</code>       -&gt; Where is your swagger-ui?</p>
+
+<p><code>apis</code>            -&gt; Define your api array.</p>
+
+<pre><code>var swagger = require('../');
+
+app.configure(function(){
+  ...
+  app.use(swagger.init(app, {
+    apiVersion: '1.0',
+    swaggerVersion: '1.0',
+    basePath: 'http://localhost:3000',
+    swaggerUI: './public/swagger/',
+    apis: ['./api.js', './api.yml']
+  }));
+  app.use(app.router);
+  ...
+});
+</code></pre>
+
+<h2>- Read from jsdoc</h2>
+
+<p>Example 'api.js'</p>
+
+<div class="highlight"><pre>
+<span class="cm">/**</span>
+<span class="cm"> * @swagger</span>
+<span class="cm"> * resourcePath: /api</span>
+<span class="cm"> * description: All about API</span>
+<span class="cm"> */</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * @swagger</span>
+<span class="cm"> * path: /login</span>
+<span class="cm"> * operations:</span>
+<span class="cm"> *   -  httpMethod: POST</span>
+<span class="cm"> *      summary: Login with username and password</span>
+<span class="cm"> *      notes: Returns a user based on username</span>
+<span class="cm"> *      responseClass: User</span>
+<span class="cm"> *      nickname: login</span>
+<span class="cm"> *      consumes: </span>
+<span class="cm"> *        - text/html</span>
+<span class="cm"> *      parameters:</span>
+<span class="cm"> *        - name: username</span>
+<span class="cm"> *          description: Your username</span>
+<span class="cm"> *          paramType: query</span>
+<span class="cm"> *          required: true</span>
+<span class="cm"> *          dataType: string</span>
+<span class="cm"> *        - name: password</span>
+<span class="cm"> *          description: Your password</span>
+<span class="cm"> *          paramType: query</span>
+<span class="cm"> *          required: true</span>
+<span class="cm"> *          dataType: string</span>
+<span class="cm"> */</span>
+<span class="nx">exports</span><span class="p">.</span><span class="nx">login</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">user</span> <span class="o">=</span> <span class="p">{};</span>
+  <span class="nx">user</span><span class="p">.</span><span class="nx">username</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">param</span><span class="p">(</span><span class="s1">'username'</span><span class="p">);</span>
+  <span class="nx">user</span><span class="p">.</span><span class="nx">password</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">param</span><span class="p">(</span><span class="s1">'password'</span><span class="p">);</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">(</span><span class="nx">user</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * @swagger</span>
+<span class="cm"> * models:</span>
+<span class="cm"> *   User:</span>
+<span class="cm"> *     id: User</span>
+<span class="cm"> *     properties:</span>
+<span class="cm"> *       username:</span>
+<span class="cm"> *         type: String</span>
+<span class="cm"> *       password:</span>
+<span class="cm"> *         type: String    </span>
+<span class="cm"> */</span>
+</pre></div>
+
+<ul>
+<li>Read from yaml file</li>
+</ul><p>Example 'api.yml'</p>
+
+<div class="highlight"><pre><span class="l-Scalar-Plain">resourcePath</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">/api</span>
+<span class="l-Scalar-Plain">description</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">All about API</span>
+<span class="l-Scalar-Plain">apis</span><span class="p-Indicator">:</span> 
+
+<span class="p-Indicator">-</span> <span class="l-Scalar-Plain">path</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">/login</span>
+  <span class="l-Scalar-Plain">operations</span><span class="p-Indicator">:</span>
+
+  <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">httpMethod</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">POST</span>
+    <span class="l-Scalar-Plain">summary</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Login with username and password</span>
+    <span class="l-Scalar-Plain">notes</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Returns a user based on username</span>
+    <span class="l-Scalar-Plain">responseClass</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">User</span>
+    <span class="l-Scalar-Plain">nickname</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">login</span>
+    <span class="l-Scalar-Plain">consumes</span><span class="p-Indicator">:</span> 
+      <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">text/html</span>
+    <span class="l-Scalar-Plain">parameters</span><span class="p-Indicator">:</span>
+
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">username</span>
+      <span class="l-Scalar-Plain">dataType</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">string</span>
+      <span class="l-Scalar-Plain">paramType</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">query</span>
+      <span class="l-Scalar-Plain">required</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">true</span>
+      <span class="l-Scalar-Plain">description</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Your username</span>
+
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">password</span>
+      <span class="l-Scalar-Plain">dataType</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">string</span>
+      <span class="l-Scalar-Plain">paramType</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">query</span>
+      <span class="l-Scalar-Plain">required</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">true</span>
+      <span class="l-Scalar-Plain">description</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Your password</span>
+
+<span class="l-Scalar-Plain">models</span><span class="p-Indicator">:</span>
+    <span class="l-Scalar-Plain">User</span><span class="p-Indicator">:</span>
+      <span class="l-Scalar-Plain">id</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">User</span>
+      <span class="l-Scalar-Plain">properties</span><span class="p-Indicator">:</span>
+        <span class="l-Scalar-Plain">username</span><span class="p-Indicator">:</span>
+          <span class="l-Scalar-Plain">type</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">String</span>
+        <span class="l-Scalar-Plain">password</span><span class="p-Indicator">:</span>
+          <span class="l-Scalar-Plain">type</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">String</span>    
+</pre></div>
+
+<h2>Examples</h2>
+
+<p>Clone the {swagger-express} repo, then install the dev dependencies:</p>
+
+<pre><code>$ git clone git://github.com/fliptoo/swagger-express.git --depth 1
+$ cd swagger-express
+$ npm install
+</code></pre>
+
+<p>and run the example:</p>
+
+<pre><code>$ cd example
+$ node app.js
+</code></pre>
+
+<h1>Credits</h1>
+
+<ul>
+<li><a href="https://github.com/visionmedia/express">Express</a></li>
+<li><a href="https://github.com/feugy/swagger-jack">swagger-jack</a></li>
+</ul><h2>License</h2>
+
+<p>(The MIT License)</p>
+
+<p>Copyright (c) 2013 Fliptoo &lt;<a href="mailto:fliptoo.studio@gmail.com">fliptoo.studio@gmail.com</a>&gt;</p>
+
+<p>Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+'Software'), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:</p>
+
+<p>The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.</p>
+
+<p>THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
+      </section>
+    </div>
+    <footer>
+      <p>Project maintained by <a href="https://github.com/fliptoo">fliptoo</a></p>
+      <p>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></p>
+    </footer>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-38720726-2");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>
