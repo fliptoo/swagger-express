@@ -7,9 +7,7 @@
 
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <script src="javascripts/scale.fix.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -19,7 +17,10 @@
       <header>
         <h1>{swagger-express}</h1>
         <p>Swagger + Express = {swagger-express}</p>
+
         <p class="view"><a href="https://github.com/fliptoo/swagger-express">View the Project on GitHub <small>fliptoo/swagger-express</small></a></p>
+
+
         <ul>
           <li><a href="https://github.com/fliptoo/swagger-express/zipball/master">Download <strong>ZIP File</strong></a></li>
           <li><a href="https://github.com/fliptoo/swagger-express/tarball/master">Download <strong>TAR Ball</strong></a></li>
@@ -33,12 +34,14 @@ View <a href="http://petstore.swagger.wordnik.com/">demo</a>.</p>
 
 <p><strong>{swagger-express}</strong> is a simple and clean solution to integrate swagger with express.</p>
 
-<h2>Installation</h2>
+<h2>
+<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
 
 <pre><code>$ npm install -g swagger-express
 </code></pre>
 
-<h2>Quick Start</h2>
+<h2>
+<a name="quick-start" class="anchor" href="#quick-start"><span class="octicon octicon-link"></span></a>Quick Start</h2>
 
 <p>Configure {swagger-express} as express middleware.</p>
 
@@ -52,7 +55,7 @@ View <a href="http://petstore.swagger.wordnik.com/">demo</a>.</p>
 
 <p><code>apis</code>            -&gt; Define your api array.</p>
 
-<pre><code>var swagger = require('../');
+<pre><code>var swagger = require('swagger-express');
 
 app.configure(function(){
   ...
@@ -68,7 +71,8 @@ app.configure(function(){
 });
 </code></pre>
 
-<h2>Read from jsdoc</h2>
+<h2>
+<a name="read-from-jsdoc" class="anchor" href="#read-from-jsdoc"><span class="octicon octicon-link"></span></a>Read from jsdoc</h2>
 
 <p>Example 'api.js'</p>
 
@@ -122,7 +126,8 @@ app.configure(function(){
 <span class="cm"> */</span>
 </pre></div>
 
-<h2>Read from yaml file</h2>
+<h2>
+<a name="read-from-yaml-file" class="anchor" href="#read-from-yaml-file"><span class="octicon octicon-link"></span></a>Read from yaml file</h2>
 
 <p>Example 'api.yml'</p>
 
@@ -164,7 +169,8 @@ app.configure(function(){
           <span class="l-Scalar-Plain">type</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">String</span>    
 </pre></div>
 
-<h2>Examples</h2>
+<h2>
+<a name="examples" class="anchor" href="#examples"><span class="octicon octicon-link"></span></a>Examples</h2>
 
 <p>Clone the {swagger-express} repo, then install the dev dependencies:</p>
 
@@ -179,12 +185,14 @@ $ npm install
 $ node app.js
 </code></pre>
 
-<h1>Credits</h1>
+<h1>
+<a name="credits" class="anchor" href="#credits"><span class="octicon octicon-link"></span></a>Credits</h1>
 
 <ul>
 <li><a href="https://github.com/visionmedia/express">Express</a></li>
 <li><a href="https://github.com/feugy/swagger-jack">swagger-jack</a></li>
-</ul><h2>License</h2>
+</ul><h2>
+<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
 
 <p>(The MIT License)</p>
 
@@ -209,12 +217,12 @@ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
       </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/fliptoo">fliptoo</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
     </div>
-    <footer>
-      <p>Project maintained by <a href="https://github.com/fliptoo">fliptoo</a></p>
-      <p>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></p>
-    </footer>
-    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    <script src="javascripts/scale.fix.js"></script>
               <script type="text/javascript">
             var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
             document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
